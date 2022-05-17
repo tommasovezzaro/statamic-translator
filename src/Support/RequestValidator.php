@@ -79,7 +79,7 @@ class RequestValidator
             throw TranslationFailed::canNotTranslateRoot();
         }
 
-        if ($entry->locale() === $site) {
+        if ($entry->locale() !== $site) {
             throw TranslationFailed::canNotTranslateSameLocale();
         }
 
