@@ -43,7 +43,7 @@ trait PreparesData
     {
         return collect($fields)
             ->map(function ($item) {
-                switch ($item['type']) {
+                switch ($item['type'] ?? null) {
                     case 'replicator':
                     case 'bard':
                         $item['sets'] = collect($item['sets'] ?? [])
@@ -72,13 +72,13 @@ trait PreparesData
                     'slug', 'table', 'tags', 'text', 'textarea',
                 ];
 
-                $supported = in_array($item['type'], $supportedFieldtypes);
+                $supported = in_array($item['type'] ?? null, $supportedFieldtypes);
 
                 if (! $supported) {
                     return false;
                 }
 
-                switch ($item['type']) {
+                switch ($item['type'] ?? null) {
                     case 'replicator':
                         return count($item['sets'] ?? []) > 0;
 
@@ -127,7 +127,7 @@ trait PreparesData
     protected function getTranslatableFieldKeys(array $fields): array
     {
         return collect($fields)->map(function ($item, $key) {
-            switch ($item['type']) {
+            switch ($item['type'] ?? null ) {
 
                 case 'bard':
                     return collect($item['sets'])
@@ -178,7 +178,7 @@ trait PreparesData
     protected function getTranslatableSetKeys(array $fields): array
     {
         $sets = collect($fields)->map(function ($item) {
-            switch ($item['type']) {
+            switch ($item['type'] ?? null) {
 
                 case 'bard':
                     return collect($item['sets'])
